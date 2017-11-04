@@ -14,12 +14,12 @@ input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-mode = 0
+collision/layers = 10
+collision/mask = 10
+mode = 2
 mass = 1.0
 friction = 1.0
-bounce = 0.0
+bounce = 0.4
 gravity_scale = 0.0
 custom_integrator = false
 continuous_cd = 0
@@ -32,6 +32,7 @@ velocity/angular = 0.0
 damp_override/linear = 3.0
 damp_override/angular = 3.0
 script/script = ExtResource( 1 )
+use_delay = 0.5
 
 [node name="Sprite" type="Sprite" parent="."]
 

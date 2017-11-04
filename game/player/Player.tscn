@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://game/player/player_behavior.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -13,14 +13,19 @@ extents = Vector2( 32, 32 )
 custom_solver_bias = 0.0
 extents = Vector2( 48, 48 )
 
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 32, 32 )
+
 [node name="player" type="KinematicBody2D"]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
+collision/layers = 5
+collision/mask = 5
 collision/margin = 0.08
 script/script = ExtResource( 1 )
 move_speed = 200
@@ -29,7 +34,7 @@ move_speed = 200
 
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="wall_collision" type="CollisionShape2D" parent="."]
 
 shape = SubResource( 1 )
 trigger = false
@@ -45,10 +50,28 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision/layers = 12
+collision/mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="grab_range"]
 
 shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="tool_collision" type="KinematicBody2D" parent="."]
+
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 2
+collision/mask = 2
+collision/margin = 0.08
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tool_collision"]
+
+shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 0
 

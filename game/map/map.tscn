@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://game/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/tools/lazer/lazer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/tools/slab/slab.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/player/dummy/dummy.tscn" type="PackedScene" id=4]
 
 [node name="Node" type="Node"]
 
@@ -12,5 +14,16 @@ transform/pos = Vector2( 397.938, 290.917 )
 [node name="lazer" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 268.307, 232.131 )
+
+[node name="slab" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 821.502, 331.615 )
+gravity_scale = 0.0
+damp_override/linear = 3.0
+damp_override/angular = 3.0
+
+[node name="dummy" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 405.475, 168.822 )
 
 
