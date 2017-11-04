@@ -6,6 +6,7 @@
 [node name="player" type="Node"]
 
 script/script = ExtResource( 1 )
+pid = 0
 
 [node name="ghost" parent="." instance=ExtResource( 2 )]
 

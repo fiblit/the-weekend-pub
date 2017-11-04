@@ -1,5 +1,6 @@
 extends Node
 
+export var pid = 0
 var look_dir = Vector2(0,0)
 var g
 func _ready():
@@ -12,7 +13,7 @@ func _process(delta):
 		var change = false
 		var candidate = g.action_flags[a]
 		var val = g.action_flags[a]
-		if Input.is_action_pressed(g.name_of[a]):
+		if Input.is_action_pressed("p"+str(pid)+"_"+g.name_of[a]):
 			# up key = off
 			# down key = on
 			if val == g.VAL.up or val == g.VAL.edge_up:
@@ -29,7 +30,6 @@ func _process(delta):
 				candidate = g.VAL.up
 				change = true
 		if change == true:
-			print("r ", g.name_of[a], "  ", g.val_name[candidate], "  ", time)
 			g.record(a, candidate, time)
 			g.play([a, candidate, time])
 	time += delta
