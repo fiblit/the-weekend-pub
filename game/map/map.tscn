@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://game/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/tools/lazer/lazer.tscn" type="PackedScene" id=2]
+
+[node name="Node" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 397.938, 290.917 )
+
+[node name="lazer" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 268.307, 232.131 )
+
+
