@@ -14,11 +14,12 @@ func _ready():
 
 var time = 0
 func _process(delta):
-	time += delta
-	if (time > 10):
-		cam_to_stage()
-	elif (time > 5):
-		cam_to_shack()
+	pass
+#	time += delta
+#	if (time > 10):
+#		cam_to_stage()
+#	elif (time > 5):
+#		cam_to_shack()
 
 func cam_to_stage():
 	rcam.set_pos(rpos)

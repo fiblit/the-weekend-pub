@@ -46,7 +46,7 @@ var name_of = {
 	ACT.mv_u:"mv_u",
 	ACT.mv_d:"mv_d",
 	ACT.pick_up:"pick_up",
-	ACT.drop_held:"drop_helf",
+	ACT.drop_held:"drop_held",
 	ACT.use_held:"use_held",
 	ACT.throw_held:"throw_held"
 }
@@ -136,12 +136,14 @@ func _process(delta):
 		elif xmove == -1:
 			move_left(delta)
 	else: #being thrown or carried
+	
 		if thrown:
 			move(velocity*delta)
 			velocity *= 0.9
 			if velocity.length() < 1:
 				can_move = true
 				thrown = false
+				velocity = Vector2(0,0)
 
 
 	#Picking up objects
@@ -194,7 +196,7 @@ func _process(delta):
 				held.be_carried(false)
 
 			if held.has_method("get_pushed"):
-				held.get_pushed(throw_force,look_dir,self)
+				held.get_pushed(throw_force,look_dir)
 
 		held = null
 
@@ -222,4 +224,4 @@ func take_damage(dmg):
 func get_pushed(force,dir):
 	thrown = true
 	can_move = false
-	velocity = dir*force/10
+	velocity = dir*force/2.0
