@@ -10,7 +10,6 @@ var use_timer = use_delay
 
 func _ready():
 	set_process(true)
-	set_mode(MODE_CHARACTER)
 	get_node("wall_placement_area/Sprite").set_hidden(true)
 	
 func _process(delta):
@@ -36,3 +35,6 @@ func do_action(dir,person):
 
 func be_thrown(dir):
 	apply_impulse(Vector2(0,0),dir*1000)
+
+func get_pushed(force,dir,by):
+	apply_impulse(Vector2(0,0),dir*force)

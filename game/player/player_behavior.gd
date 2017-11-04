@@ -4,11 +4,17 @@ export var move_speed = 200
 
 var look_dir = Vector2(0,0)
 var drop_dist = 64
+var throw_force = 1000
+
+var throw_time = 0
+var throw_timer = 0
+var thrown_by = null
 
 var held = null
 var use_timer = 0
 
-var am_carried = false
+var can_move = true
+var velocity = Vector2(0,0)
 
 func _ready():
 	set_process(true)
@@ -18,7 +24,7 @@ func _process(delta):
 	look_dir = (get_global_mouse_pos() - get_global_pos()).normalized()
 	
 	#Walking
-	if !am_carried:
+	if can_move:
 		var ymove = Input.is_action_pressed("mv_up") - Input.is_action_pressed("mv_down")
 		if ymove == 1:
 			move_up(delta)
@@ -29,6 +35,16 @@ func _process(delta):
 			move_right(delta)
 		elif xmove == -1:
 			move_left(delta)
+	else: #being thrown or carried
+		if throw_time != 0:
+			move(velocity*delta)
+			throw_timer += delta
+			if throw_timer > throw_time:
+				remove_collision_exception_with(thrown_by)
+				throw_time = 0
+				throw_timer = 0
+				can_move = true
+		
 	
 	#Picking up objects
 	if Input.is_action_pressed("pick_up"):
@@ -79,27 +95,38 @@ func _process(delta):
 			if held.has_method("be_carried"):
 				held.be_carried(false)
 				
-			if held.has_method("be_thrown"):
-				held.be_thrown(look_dir)
+			if held.has_method("get_pushed"):
+				held.get_pushed(throw_force,look_dir,self)
 		
 		held = null
 		
 
 func be_carried(b):
-	am_carried = b
+	can_move = !b
+	if b:
+		throw_time = 0
+		throw_timer = 0
 	
 func move_up(delta):
 	move(Vector2(0,-move_speed*delta))
-	#set_pos(get_pos() + (Vector2(0,-move_speed*delta)))
 	
 func move_down(delta):
 	move(Vector2(0,move_speed*delta))
-	#set_pos(get_pos() + Vector2(0,move_speed*delta))
 	
 func move_right(delta):
 	move(Vector2(move_speed*delta,0))
-	#set_pos(get_pos() + Vector2(move_speed*delta,0))
 	
 func move_left(delta):
 	move(Vector2(-move_speed*delta,0))
-	#set_pos(get_pos() + Vector2(-move_speed*delta,0))
+
+func take_damage(dmg):
+	queue_free()
+
+func get_pushed(force,dir,by):
+	thrown_by = by
+	add_collision_exception_with(thrown_by)
+	can_move = false
+	velocity = dir*force/10
+	throw_time = force/1000
+	
+	
