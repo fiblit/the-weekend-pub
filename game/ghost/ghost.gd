@@ -106,7 +106,7 @@ var throw_force = 1000
 
 var throw_time = 0
 var throw_timer = 0
-var thrown_by = null
+var thrown = false
 
 var held = null
 var use_timer = 0
@@ -114,6 +114,8 @@ var use_timer = 0
 var can_move = true
 var velocity = Vector2(0,0)
 var move_speed = 200
+
+var is_dead = false
 
 func _process(delta):
 	player(delta)
@@ -134,14 +136,12 @@ func _process(delta):
 		elif xmove == -1:
 			move_left(delta)
 	else: #being thrown or carried
-		if throw_time != 0:
+		if thrown:
 			move(velocity*delta)
-			throw_timer += delta
-			if throw_timer > throw_time:
-				remove_collision_exception_with(thrown_by)
-				throw_time = 0
-				throw_timer = 0
+			velocity *= 0.9
+			if velocity.length() < 1:
 				can_move = true
+				thrown = false
 
 
 	#Picking up objects
@@ -217,11 +217,9 @@ func move_left(delta):
 	move(Vector2(-move_speed*delta,0))
 
 func take_damage(dmg):
-	queue_free()
+	is_dead = true
 
-func get_pushed(force,dir,by):
-	thrown_by = by
-	add_collision_exception_with(thrown_by)
+func get_pushed(force,dir):
+	thrown = true
 	can_move = false
 	velocity = dir*force/10
-	throw_time = force/1000

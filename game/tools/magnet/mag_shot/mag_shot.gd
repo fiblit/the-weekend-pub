@@ -11,7 +11,6 @@ func _fixed_process(delta):
 		var hit = get_collider()
 		if hit.has_method("get_pushed"):
 			hit.get_pushed(force,-velocity.normalized())
-		print(str(hit))
 		queue_free()
 	else:
 		move(velocity*delta)
