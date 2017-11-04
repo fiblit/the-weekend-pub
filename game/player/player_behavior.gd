@@ -1,8 +1,8 @@
 extends Node
 
 export var pid = 0
-var look_dir = Vector2(0,0)
 var g
+
 func _ready():
 	g = get_node("ghost")
 	set_process(true)
