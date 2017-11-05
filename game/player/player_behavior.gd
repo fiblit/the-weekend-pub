@@ -10,6 +10,8 @@ func _ready():
 
 var time = 0
 func _process(delta):
+	look_dir = Vector2(g.anydown(g.ACT.lk_r) - g.anydown(g.ACT.lk_l),\
+		g.anydown(g.ACT.lk_d) - g.anydown(g.ACT.lk_u)).normalized()
 	if g != null and not g.is_dead:
 		for a in g.ACT.values():
 			var change = false
@@ -33,7 +35,7 @@ func _process(delta):
 					change = true
 			if change == true:
 				g.record(a, candidate, time, look_dir)
-				g.play([a, candidate, time, look_dir])
+				g.play(g.events[g.events.size()-1])
 		time += delta
 	elif g != null: #no ghooooost, _you_ died!
 		#save the ghoooost!/move to roster
