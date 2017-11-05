@@ -64,6 +64,8 @@ var name_of = {
 var action_flags = {}
 var look_dir_flag = {}
 
+var look_dir_flag
+
 func anydown(a):
 	var av = action_flags[a]
 	return av == VAL.down or av == VAL.edge_down
@@ -111,8 +113,6 @@ func player(delta):
 		play_timer += delta
 
 #### behavior globals
-var look_dir = Vector2(0,0)
-
 var drop_dist = 64
 var throw_force = 1000
 
@@ -134,8 +134,8 @@ func _process(delta):
 
 	#For now look_dir is from mouse - should be right stick in future
 	#look_dir = (get_global_mouse_pos() - get_global_pos()).normalized()
-	look_dir = Vector2(anydown(ACT.lk_r) - anydown(ACT.lk_l), anydown(ACT.lk_d) - anydown(ACT.lk_u)).normalized()
-	
+	#look_dir = Vector2(anydown(ACT.lk_r) - anydown(ACT.lk_l), anydown(ACT.lk_d) - anydown(ACT.lk_u)).normalized()
+
 	#Walking
 	if can_move:
 		var ymove = anydown(ACT.mv_u) - anydown(ACT.mv_d)
@@ -180,7 +180,7 @@ func _process(delta):
 			remove_collision_exception_with(held)
 			remove_child(held)
 			get_parent().add_child(held)
-			held.set_pos(get_pos() + look_dir*drop_dist)
+			held.set_pos(get_pos() + look_dir_flag*drop_dist)
 			if held.has_method("set_mode"):
 				held.set_mode(held.MODE_CHARACTER)
 			if held.has_method("be_carried"):
@@ -189,13 +189,13 @@ func _process(delta):
 
 	if anydown(ACT.use_held):
 		if held != null:
-			if look_dir != Vector2(0,0):
+			if look_dir_flag != Vector2(0,0):
 				if held.has_method("do_action"):
-					held.do_action(look_dir,self)
+					held.do_action(look_dir_flag,self)
 
 	if held != null:
 		if held.has_method("update_carried"):
-			held.update_carried(look_dir)
+			held.update_carried(look_dir_flag)
 
 	if anydown(ACT.throw_held):
 		#Same as drop but we call thrown at the end
@@ -203,14 +203,14 @@ func _process(delta):
 			remove_collision_exception_with(held)
 			remove_child(held)
 			get_parent().add_child(held)
-			held.set_pos(get_pos() + look_dir*drop_dist)
+			held.set_pos(get_pos() + look_dir_flag*drop_dist)
 			if held.has_method("set_mode"):
 				held.set_mode(held.MODE_CHARACTER)
 			if held.has_method("be_carried"):
 				held.be_carried(false)
 
 			if held.has_method("get_pushed"):
-				held.get_pushed(throw_force,look_dir)
+				held.get_pushed(throw_force,look_dir_flag)
 
 		held = null
 
