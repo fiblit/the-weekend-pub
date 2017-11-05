@@ -8,6 +8,7 @@ extends KinematicBody2D
 
 enum FLAG {
 	val,
+	look_dir,
 	deltaT,
 	errorT
 }
@@ -15,6 +16,7 @@ enum EV {
 	act,
 	val,
 	time,
+	look_dir,
 	deltaT,
 	errorT
 }
@@ -38,7 +40,11 @@ enum ACT {
 	pick_up,
 	drop_held,
 	use_held,
-	throw_held
+	throw_held,
+	lk_r,
+	lk_l,
+	lk_u,
+	lk_d
 }
 var name_of = {
 	ACT.mv_r:"mv_r",
@@ -48,7 +54,11 @@ var name_of = {
 	ACT.pick_up:"pick_up",
 	ACT.drop_held:"drop_held",
 	ACT.use_held:"use_held",
-	ACT.throw_held:"throw_held"
+	ACT.throw_held:"throw_held",
+	ACT.lk_r:"lk_r",
+	ACT.lk_l:"lk_l",
+	ACT.lk_u:"lk_u",
+	ACT.lk_d:"lk_d"
 }
 #ACT: VAL
 var action_flags = {}
@@ -71,11 +81,12 @@ var events = []
 func erase():
 	events = []
 
-func record(action, value, time):
-	events += [[action, value, time]]
+func record(action, value, time, look):
+	events += [[action, value, time, look]]
 
 func play(event):
 	action_flags[event[EV.act]] = event[EV.val]
+	look_dir_flag = event[EV.look_dir]
 
 var playing = false
 func play_back():
@@ -121,8 +132,9 @@ func _process(delta):
 	player(delta)
 
 	#For now look_dir is from mouse - should be right stick in future
-	look_dir = (get_global_mouse_pos() - get_global_pos()).normalized()
-
+	#look_dir = (get_global_mouse_pos() - get_global_pos()).normalized()
+	look_dir = Vector2(anydown(ACT.lk_r) - anydown(ACT.lk_l), anydown(ACT.lk_d) - anydown(ACT.lk_u)).normalized()
+	
 	#Walking
 	if can_move:
 		var ymove = anydown(ACT.mv_u) - anydown(ACT.mv_d)
@@ -176,8 +188,9 @@ func _process(delta):
 
 	if anydown(ACT.use_held):
 		if held != null:
-			if held.has_method("do_action"):
-				held.do_action(look_dir,self)
+			if look_dir != Vector2(0,0):
+				if held.has_method("do_action"):
+					held.do_action(look_dir,self)
 
 	if held != null:
 		if held.has_method("update_carried"):
