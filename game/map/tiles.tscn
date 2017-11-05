@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://game/map/wall.png" type="Texture" id=2]
+[ext_resource path="res://game/map/floor.png" type="Texture" id=3]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
 
 [node name="tiles" type="Node2D"]
 
@@ -8,6 +20,73 @@
 
 visibility/opacity = 0.75
 texture = ExtResource( 1 )
+centered = false
+region_rect = Rect2( 0, 0, 1, 1 )
+
+[node name="corner" type="Sprite" parent="."]
+
+visibility/opacity = 0.75
+transform/pos = Vector2( 150, 150 )
+texture = ExtResource( 2 )
+centered = false
+region_rect = Rect2( 0, 0, 1, 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="corner"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="corner/StaticBody2D"]
+
+build_mode = 0
+polygon = Vector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="floor" type="Sprite" parent="."]
+
+transform/pos = Vector2( 150, 0 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="wall" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, 150 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="wall"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall/StaticBody2D"]
+
+build_mode = 0
+polygon = Vector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="door" type="Sprite" parent="."]
+
+transform/pos = Vector2( 300, 0 )
+texture = ExtResource( 2 )
 centered = false
 
 

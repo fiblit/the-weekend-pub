@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://game/tools/lazer/lazer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/tools/slab/slab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/tools/magnet/magnet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/map/shack.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/map/roster.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/map/arena.tscn" type="PackedScene" id=6]
 
 [node name="map" type="Node"]
 
@@ -20,5 +23,21 @@ damp_override/angular = 3.0
 [node name="magnet" parent="." instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 563.746, 147.72 )
+
+[node name="shack" parent="." instance=ExtResource( 4 )]
+
+[node name="shack1" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 4096, 0 )
+transform/scale = Vector2( -1, 1 )
+
+[node name="roster" parent="." instance=ExtResource( 5 )]
+
+[node name="roster1" parent="." instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 4096, 0 )
+transform/scale = Vector2( -1, 1 )
+
+[node name="arena" parent="." instance=ExtResource( 6 )]
 
 

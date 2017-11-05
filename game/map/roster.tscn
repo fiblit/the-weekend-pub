@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://game/map/tiles.tres" type="TileSet" id=1]
+
+[node name="roster" type="TileMap"]
+
+z/z = -1
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 100, 100 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 5, 3, 6, 3, 7, 3, 8, 3, 9, 3, 65541, 2, 65545, 2, 131079, 2, 196613, 2, 196617, 2, 262151, 2, 327685, 2, 327689, 2, 393223, 2, 458757, 2, 458761, 2, 524295, 2, 589829, 2, 589833, 2, 655367, 2, 720901, 3, 720902, 3, 720903, 3, 720904, 3, 720905, 3 )
+
+[node name="n_wall" type="StaticBody2D" parent="."]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="ne_wall" type="StaticBody2D" parent="."]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="door" type="StaticBody2D" parent="."]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+one_way_collision/direction = Vector2( 1, 0 )
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="se_wall" type="StaticBody2D" parent="."]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="s_wall" type="StaticBody2D" parent="."]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+

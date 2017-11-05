@@ -46,7 +46,7 @@ var name_of = {
 	ACT.mv_u:"mv_u",
 	ACT.mv_d:"mv_d",
 	ACT.pick_up:"pick_up",
-	ACT.drop_held:"drop_helf",
+	ACT.drop_held:"drop_held",
 	ACT.use_held:"use_held",
 	ACT.throw_held:"throw_held"
 }
