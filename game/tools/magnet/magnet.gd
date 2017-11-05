@@ -30,5 +30,5 @@ func do_action(dir,person):
 func be_thrown(dir):
 	apply_impulse(Vector2(0,0),dir*1000)
 
-func get_pushed(force,dir,by):
+func get_pushed(force,dir):
 	apply_impulse(Vector2(0,0),dir*force)

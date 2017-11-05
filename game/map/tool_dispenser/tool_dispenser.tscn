@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://game/map/tool_dispenser/tool_dispenser.gd" type="Script" id=1]
+
+[node name="tool_dispenser" type="Node2D"]
+
+script/script = ExtResource( 1 )
+tooltype = "magnet"
+
+[node name="Sprite" type="Sprite" parent="."]
+
+
