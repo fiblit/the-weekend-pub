@@ -2,6 +2,7 @@ extends Node
 
 export var pid = 0
 var g
+var look_dir
 
 func _ready():
 	g = get_node("ghost")
