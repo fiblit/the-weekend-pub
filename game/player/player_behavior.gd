@@ -2,6 +2,7 @@ extends Node
 
 export var pid = 0
 var g
+var look_dir
 
 func _ready():
 	g = get_node("ghost")
@@ -31,8 +32,8 @@ func _process(delta):
 					candidate = g.VAL.up
 					change = true
 			if change == true:
-				g.record(a, candidate, time)
-				g.play([a, candidate, time])
+				g.record(a, candidate, time, look_dir)
+				g.play([a, candidate, time, look_dir])
 		time += delta
 	elif g != null: #no ghooooost, _you_ died!
 		#save the ghoooost!/move to roster
