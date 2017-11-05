@@ -11,4 +11,4 @@ func tool_removed():
 	#tl = load("res://game/tools/lazer/lazer.tscn")
 	var new_tool = tl.instance()
 	add_child(new_tool)
-	new_tool.stored_in = self
+	#new_tool.stored_in = self

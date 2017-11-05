@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://game/map/tiles.tres" type="TileSet" id=1]
+[ext_resource path="res://game/map/platform/platform.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -101,5 +102,47 @@ transform/scale = Vector2( 5, 15 )
 shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
+
+[node name="platforms" type="Node" parent="."]
+
+[node name="platform" parent="platforms" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 950, 150 )
+
+[node name="platform1" parent="platforms" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 950, 350 )
+
+[node name="platform2" parent="platforms" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 950, 550 )
+
+[node name="platform3" parent="platforms" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 950, 750 )
+
+[node name="platform4" parent="platforms" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 950, 950 )
+
+[node name="platform5" parent="platforms" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 950, 250 )
+
+[node name="platform6" parent="platforms" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 950, 450 )
+
+[node name="platform7" parent="platforms" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 950, 650 )
+
+[node name="platform8" parent="platforms" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 950, 850 )
+
+[node name="platform9" parent="platforms" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 950, 1050 )
 
 

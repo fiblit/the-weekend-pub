@@ -62,6 +62,7 @@ var name_of = {
 }
 #ACT: VAL
 var action_flags = {}
+var look_dir_flag = {}
 
 func anydown(a):
 	var av = action_flags[a]
