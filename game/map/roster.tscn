@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://game/map/tiles.tres" type="TileSet" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
 
 [node name="roster" type="TileMap"]
 
@@ -19,57 +29,77 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( 5, 3, 6, 3, 7, 3, 8, 3, 9, 3, 65541, 2, 65545, 2, 131079, 2, 196613, 2, 196617, 2, 262151, 2, 327685, 2, 327689, 2, 393223, 2, 458757, 2, 458761, 2, 524295, 2, 589829, 2, 589833, 2, 655367, 2, 720901, 3, 720902, 3, 720903, 3, 720904, 3, 720905, 3 )
+tile_data = IntArray( 5, 3, 6, 3, 7, 3, 8, 3, 9, 3, 65541, 2, 65545, 2, 65546, 4, 131079, 2, 131082, 4, 196613, 2, 196617, 2, 196618, 4, 262151, 2, 327685, 2, 327689, 2, 327690, 4, 393223, 2, 393226, 4, 458757, 2, 458761, 2, 524295, 2, 524298, 4, 589829, 2, 589833, 2, 589834, 4, 655367, 2, 655370, 4, 720901, 3, 720902, 3, 720903, 3, 720904, 3, 720905, 3 )
 
 [node name="n_wall" type="StaticBody2D" parent="."]
 
+transform/pos = Vector2( 1000, 100 )
 input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 5, 0, 0, 15, 50, 150 )
+shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
+one_way_collision/direction = Vector2( -1, 0 )
+one_way_collision/max_depth = 10.0
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="ne_wall" type="StaticBody2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="n_wall"]
 
-input/pickable = false
-collision/layers = 1
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
+transform/pos = Vector2( 50, 150 )
+transform/scale = Vector2( 5, 15 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
 
 [node name="door" type="StaticBody2D" parent="."]
 
+transform/pos = Vector2( 1000, 100 )
 input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 5, 0, 0, 20, 50, 500 )
+shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
-one_way_collision/direction = Vector2( 1, 0 )
+one_way_collision/direction = Vector2( -1, 0 )
+one_way_collision/max_depth = 10.0
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="se_wall" type="StaticBody2D" parent="."]
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="door"]
 
-input/pickable = false
-collision/layers = 1
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
+transform/pos = Vector2( 50, 500 )
+transform/scale = Vector2( 5, 20 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
 
 [node name="s_wall" type="StaticBody2D" parent="."]
 
 input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 5, 0, 0, 15, 1050, 950 )
+shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
+one_way_collision/direction = Vector2( -1, 0 )
+one_way_collision/max_depth = 10.0
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
+
+[node name="CollisionShape2D2 2" type="CollisionShape2D" parent="s_wall"]
+
+transform/pos = Vector2( 1050, 950 )
+transform/scale = Vector2( 5, 15 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
 
 

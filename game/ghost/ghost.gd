@@ -136,7 +136,7 @@ func _process(delta):
 		elif xmove == -1:
 			move_left(delta)
 	else: #being thrown or carried
-	
+
 		if thrown:
 			move(velocity*delta)
 			velocity *= 0.9
